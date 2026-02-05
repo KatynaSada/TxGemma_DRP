@@ -61,13 +61,10 @@ echo ""
 echo "Step 5: Installing Python packages from requirements.txt..."
 pip install -r ../requirements.txt
 
-# Install optional packages for visualization
+# Verify ai4clinic installation
 echo ""
-read -p "Install visualization packages (matplotlib, seaborn)? (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    pip install matplotlib seaborn
-fi
+echo "Verifying ai4clinic installation..."
+python -c "import ai4clinic; print(f'ai4clinic installed successfully')" || echo "Warning: ai4clinic not found"
 
 # Verify installation
 echo ""
@@ -81,6 +78,7 @@ python -c "import torch; print(f'CUDA version: {torch.version.cuda}')" || echo "
 python -c "import transformers; print(f'Transformers version: {transformers.__version__}')"
 python -c "import peft; print(f'PEFT version: {peft.__version__}')"
 python -c "import trl; print(f'TRL version: {trl.__version__}')"
+python -c "import ai4clinic; print(f'ai4clinic: Ready for drug response analysis')"
 
 echo ""
 echo "====================================="

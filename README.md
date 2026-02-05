@@ -40,6 +40,8 @@
 
 **TxGemma_DRP** is a fine-tuning pipeline for Google's [TxGemma model](https://huggingface.co/google/txgemma-2b-predict) to predict drug response in cancer cell lines using GDSC (Genomics of Drug Sensitivity in Cancer) data. The project leverages Parameter-Efficient Fine-Tuning (PEFT) with LoRA to adapt the pre-trained TxGemma model for personalized drug response prediction tasks.
 
+This pipeline uses [**ai4clinic**](https://github.com/KatynaSada/ai4clinic), a specialized package for drug response metrics and visualization, to provide comprehensive performance analysis and publication-quality plots.
+
 ### What is TxGemma?
 
 TxGemma is a specialized variant of the Gemma language model family, designed specifically for therapeutic and drug discovery applications. It can predict drug responses by understanding molecular structures (SMILES) and cellular contexts.
@@ -149,7 +151,12 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 
 # Install requirements
 pip install -r requirements.txt
+
+# Install ai4clinic for metrics and visualization
+pip install ai4clinic
 ```
+
+**Note**: The [ai4clinic](https://github.com/KatynaSada/ai4clinic) package is required for computing drug response metrics and generating visualization plots.
 
 ### 4. Set Up API Keys
 
