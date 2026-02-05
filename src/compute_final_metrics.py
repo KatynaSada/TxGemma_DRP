@@ -207,138 +207,138 @@ def main():
 
     # Generate visualizations
     # Density scatter plot
-        print("\nGenerating density scatter plot...")
-        try:
-            scatter_metrics = preds2scatter(
-                all_predictions, all_labels, all_cells, all_fold_names,
-                output_path=os.path.join(figures_dir, f"density_{opt.input_type}_{opt.split_type}.png"),
-                density_bins=(90, 90),
-                cmap='turbo',
-                marker='.',
-                marker_size=6,
-                best_fit_line=True,
-                title='',
-                title_fontsize=20,
-                xlabel='Real Response (AUDRC)',
-                xlabel_fontsize=20,
-                ylabel='Predicted Response (AUDRC)',
-                ylabel_fontsize=20,
-                display_plot=False,
-                verbose=True,
-                show_legend=True,
-                legend_position=(0.46, 0.25),
-                annotation_fontsize=17,
-                transparent_bg=True,
-                plot_size=(7, 5),
-                x_range=(-0.01, 1.1),
-                y_range=(0, 0.7),
-                xtick_fontsize=17,
-                ytick_fontsize=17
-            )
+    print("\nGenerating density scatter plot...")
+    try:
+        scatter_metrics = preds2scatter(
+            all_predictions, all_labels, all_cells, all_fold_names,
+            output_path=os.path.join(figures_dir, f"density_{opt.input_type}_{opt.split_type}.png"),
+            density_bins=(90, 90),
+            cmap='turbo',
+            marker='.',
+            marker_size=6,
+            best_fit_line=True,
+            title='',
+            title_fontsize=20,
+            xlabel='Real Response (AUDRC)',
+            xlabel_fontsize=20,
+            ylabel='Predicted Response (AUDRC)',
+            ylabel_fontsize=20,
+            display_plot=False,
+            verbose=True,
+            show_legend=True,
+            legend_position=(0.46, 0.25),
+            annotation_fontsize=17,
+            transparent_bg=True,
+            plot_size=(7, 5),
+            x_range=(-0.01, 1.1),
+            y_range=(0, 0.7),
+            xtick_fontsize=17,
+            ytick_fontsize=17
+        )
+        
+        if run:
+            run.log({
+                "Average pearson cor": scatter_metrics['average_pearson'],
+                "Average spearman cor": scatter_metrics['average_spearman'],
+                "Overall pearson cor": scatter_metrics['overall_pearson'],
+                "Overall spearman cor": scatter_metrics['overall_spearman']
+            })
             
-            if run:
-                run.log({
-                    "Average pearson cor": scatter_metrics['average_pearson'],
-                    "Average spearman cor": scatter_metrics['average_spearman'],
-                    "Overall pearson cor": scatter_metrics['overall_pearson'],
-                    "Overall spearman cor": scatter_metrics['overall_spearman']
-                })
-                
-                if opt.log_artifact:
-                    artifact = wandb.Artifact("preds2scatter", type="graphic")
-                    artifact.add_file(os.path.join(figures_dir, f"density_{opt.input_type}_{opt.split_type}.png"))
-                    run.log_artifact(artifact)
-                    
-            print(f"  Average Pearson: {scatter_metrics['average_pearson']:.3f}")
-            print(f"  Average Spearman: {scatter_metrics['average_spearman']:.3f}")
-            
-        except Exception as e:
-            print(f"Error generating scatter plot: {e}")
-
-        # Best to worst drugs plot
-        print("\nGenerating best-to-worst drugs plot...")
-        try:
-            metrics = best2worst2(
-                all_predictions, all_labels, all_drug_names, all_cells, all_fold_names,
-                plot_size=(11, 8),
-                corr_metric='spearman',
-                num_select=2,
-                output_path=os.path.join(figures_dir, f"{opt.input_type}_{opt.split_type}.png"),
-                marker='.',
-                marker_size=7,
-                best_fit_line=True,
-                title='',
-                title_fontsize=40,
-                xlabel='Real Response (AUDRC)',
-                xlabel_fontsize=30,
-                ylabel='Predicted Response (AUDRC)',
-                ylabel_fontsize=30,
-                annotation_fontsize=30,
-                worst_color_hex=None,
-                best_color_hex=None,
-                display_plot=False,
-                verbose=True,
-                show_metrics=False,
-                show_legend=True,
-                legend_position=(2, 0.5),
-                x_range=(-0.01, 1.1),
-                y_range=(0, 0.7),
-                xtick_fontsize=25,
-                ytick_fontsize=25,
-                transparent_bg=True
-            )
-            
-            if run and opt.log_artifact:
-                artifact = wandb.Artifact("best2worst2", type="graphic")
-                artifact.add_file(os.path.join(figures_dir, f"{opt.input_type}_{opt.split_type}.png"))
+            if opt.log_artifact:
+                artifact = wandb.Artifact("preds2scatter", type="graphic")
+                artifact.add_file(os.path.join(figures_dir, f"density_{opt.input_type}_{opt.split_type}.png"))
                 run.log_artifact(artifact)
                 
-        except Exception as e:
-            print(f"Error generating best-to-worst plot: {e}")
+        print(f"  Average Pearson: {scatter_metrics['average_pearson']:.3f}")
+        print(f"  Average Spearman: {scatter_metrics['average_spearman']:.3f}")
+        
+    except Exception as e:
+        print(f"Error generating scatter plot: {e}")
 
-        # Waterfall plot
-        print("\nGenerating waterfall plot...")
-        try:
-            mean_corr, drug_corrs = drugs2waterfall(
-                all_predictions, all_labels, all_drug_names, all_cells, all_fold_names,
-                output_path=os.path.join(figures_dir, f"waterfall_{opt.input_type}_{opt.split_type}.png"),
-                corr_metric='spearman',
-                num_select=10,
-                mark_threshold=0.5,
-                color=None,
-                display_plot=False,
-                percentage_position=(0.17, 0.5),
-                percentage_fontsize=40,
-                ylabel='Spearman Correlation',
-                ylabel_fontsize=25,
-                xlabel='',
-                xlabel_fontsize=20,
-                title='',
-                title_fontsize=20,
-                ax2_title="",
-                ytick_fontsize=22,
-                transparent_bg=True,
-                bar_annotation_fontsize=26,
-                drug_name_fontsize=24,
-                plot_size=(13, 7),
-                ax2_ylim=(0.03, 0.9),
-                legend_position=(1, 1),
-                legend_fontsize=15,
-                legend=False
-            )
+    # Best to worst drugs plot
+    print("\nGenerating best-to-worst drugs plot...")
+    try:
+        metrics = best2worst2(
+            all_predictions, all_labels, all_drug_names, all_cells, all_fold_names,
+            plot_size=(11, 8),
+            corr_metric='spearman',
+            num_select=2,
+            output_path=os.path.join(figures_dir, f"{opt.input_type}_{opt.split_type}.png"),
+            marker='.',
+            marker_size=7,
+            best_fit_line=True,
+            title='',
+            title_fontsize=40,
+            xlabel='Real Response (AUDRC)',
+            xlabel_fontsize=30,
+            ylabel='Predicted Response (AUDRC)',
+            ylabel_fontsize=30,
+            annotation_fontsize=30,
+            worst_color_hex=None,
+            best_color_hex=None,
+            display_plot=False,
+            verbose=True,
+            show_metrics=False,
+            show_legend=True,
+            legend_position=(2, 0.5),
+            x_range=(-0.01, 1.1),
+            y_range=(0, 0.7),
+            xtick_fontsize=25,
+            ytick_fontsize=25,
+            transparent_bg=True
+        )
+        
+        if run and opt.log_artifact:
+            artifact = wandb.Artifact("best2worst2", type="graphic")
+            artifact.add_file(os.path.join(figures_dir, f"{opt.input_type}_{opt.split_type}.png"))
+            run.log_artifact(artifact)
             
-            if run:
-                run.log({"Average spearman correlations of all drugs": mean_corr})
+    except Exception as e:
+        print(f"Error generating best-to-worst plot: {e}")
+
+    # Waterfall plot
+    print("\nGenerating waterfall plot...")
+    try:
+        mean_corr, drug_corrs = drugs2waterfall(
+            all_predictions, all_labels, all_drug_names, all_cells, all_fold_names,
+            output_path=os.path.join(figures_dir, f"waterfall_{opt.input_type}_{opt.split_type}.png"),
+            corr_metric='spearman',
+            num_select=10,
+            mark_threshold=0.5,
+            color=None,
+            display_plot=False,
+            percentage_position=(0.17, 0.5),
+            percentage_fontsize=40,
+            ylabel='Spearman Correlation',
+            ylabel_fontsize=25,
+            xlabel='',
+            xlabel_fontsize=20,
+            title='',
+            title_fontsize=20,
+            ax2_title="",
+            ytick_fontsize=22,
+            transparent_bg=True,
+            bar_annotation_fontsize=26,
+            drug_name_fontsize=24,
+            plot_size=(13, 7),
+            ax2_ylim=(0.03, 0.9),
+            legend_position=(1, 1),
+            legend_fontsize=15,
+            legend=False
+        )
+        
+        if run:
+            run.log({"Average spearman correlations of all drugs": mean_corr})
+            
+            if opt.log_artifact:
+                artifact = wandb.Artifact("drugs2waterfall", type="graphic")
+                artifact.add_file(os.path.join(figures_dir, f"waterfall_{opt.input_type}_{opt.split_type}.png"))
+                run.log_artifact(artifact)
                 
-                if opt.log_artifact:
-                    artifact = wandb.Artifact("drugs2waterfall", type="graphic")
-                    artifact.add_file(os.path.join(figures_dir, f"waterfall_{opt.input_type}_{opt.split_type}.png"))
-                    run.log_artifact(artifact)
-                    
-            print(f"  Mean drug correlation: {mean_corr:.3f}")
-            
-        except Exception as e:
-            print(f"Error generating waterfall plot: {e}")
+        print(f"  Mean drug correlation: {mean_corr:.3f}")
+        
+    except Exception as e:
+        print(f"Error generating waterfall plot: {e}")
     
     if run:
         run.finish()
