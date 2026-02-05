@@ -73,20 +73,21 @@ TxGemma is a specialized variant of the Gemma language model family, designed sp
 ```
 TxGemma_DRP/
 ├── src/
-│   ├── finetune_txgemma.py      # Main training script
-│   └── compute_final_metrics.py  # Metrics computation and visualization
+│   ├── finetune_txgemma.py         # Main training script
+│   └── compute_final_metrics.py    # Metrics computation and visualization
 ├── scripts/
-│   └── train_txgemma.sh          # Training execution script
+│   └── train_txgemma.sh            # Training execution script
 ├── cluster/
-│   └── submit_training.sbatch    # SLURM job submission script
+│   └── submit_training.sbatch      # SLURM job submission script
 ├── environment/
-│   └── setup_environment.sh      # Environment setup script
-├── docs/
-│   └── (documentation files)
-├── examples/
-│   └── (example data and notebooks)
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
+│   └── setup_environment.sh        # Environment setup script
+├── data/
+│   └── examples/
+│       ├── gdsc1_celllines.txt     # Example cell line descriptions
+│       └── README.md               # Data format documentation
+├── requirements.txt                # Python dependencies
+├── LICENSE                         # Apache 2.0 License
+└── README.md                       # This file
 ```
 
 ---
@@ -191,6 +192,8 @@ data/
     │   └── ...
     └── ...
 ```
+
+**📄 Example data format**: See [`data/examples/`](data/examples/) for reference files and detailed format documentation.
 
 ### Step 2: Configure Training
 
