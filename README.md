@@ -6,7 +6,6 @@
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
 **Based on Google's [TxGemma Fine-tuning Cookbook](https://github.com/google-gemini/gemma-cookbook/blob/main/TxGemma/%5BTxGemma%5DFinetune_with_Hugging_Face.ipynb)**
 
@@ -31,7 +30,6 @@
 - [Results](#results)
 - [Citation](#citation)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ---
@@ -94,7 +92,6 @@ TxGemma_DRP/
 │       ├── gdsc1_celllines.txt     # Example cell line descriptions
 │       └── README.md               # Data format documentation
 ├── requirements.txt                # Python dependencies
-├── LICENSE                         # Apache 2.0 License
 └── README.md                       # This file
 ```
 
@@ -401,13 +398,6 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 ## 🙏 Acknowledgments
