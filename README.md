@@ -297,10 +297,9 @@ sbatch submit_training.sbatch
 
 #### Cell Line Descriptions (`gdsc1_celllines.txt`)
 ```
-MC-CAR, peripheral blood cell sourced from transformed
-ES5, cell sourced from cancer
-SK-ES-1, cell sourced from cancer
-COLO-829, skin cell sourced from cancer
+HT-29, colon cell sourced from primary, with histology adenocarcinoma-md
+MCF7, breast cell sourced from pleural effusion, with histology adenocarcinoma- mammary gland; breast; metastatic site: pleural effusion;
+BT-549, breast cell sourced from metastasis, with histology papillary infiltrating ductal carcinoma-mammary gland; breast
 ...
 ```
 Format: `Cell_Line_Name, tissue and origin description`
