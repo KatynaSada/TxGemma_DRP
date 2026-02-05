@@ -10,14 +10,10 @@ import numpy as np
 import pandas as pd
 import torch
 import wandb
+from scipy.stats import pearsonr, spearmanr
 
-# Try to import ai4clinic modules
-try:
-    from ai4clinic.graphs import drugs2waterfall, preds2scatter, best2worst2
-    AI4CLINIC_AVAILABLE = True
-except ImportError:
-    print("Warning: ai4clinic module not found. Visualization features will be limited.")
-    AI4CLINIC_AVAILABLE = False
+# Import ai4clinic modules for metrics and visualization
+from ai4clinic.graphs import drugs2waterfall, preds2scatter, best2worst2
 
 
 def normalize_value(value, min_value=0.0, max_value=1.0, normalize=True, target_range=1000.0):
@@ -209,9 +205,8 @@ def main():
     print(f"Number of unique drugs: {len(set(all_drugs))}")
     print(f"Number of unique cell lines: {len(set(all_cells))}")
 
-    # Generate visualizations if ai4clinic is available
-    if AI4CLINIC_AVAILABLE:
-        # Density scatter plot
+    # Generate visualizations
+    # Density scatter plot
         print("\nGenerating density scatter plot...")
         try:
             scatter_metrics = preds2scatter(
@@ -344,27 +339,6 @@ def main():
             
         except Exception as e:
             print(f"Error generating waterfall plot: {e}")
-    else:
-        print("\nSkipping visualizations (ai4clinic not available)")
-        
-        # Compute basic metrics without visualization
-        from scipy.stats import pearsonr, spearmanr
-        
-        pearson_corr, _ = pearsonr(all_predictions, all_labels)
-        spearman_corr, _ = spearmanr(all_predictions, all_labels)
-        rmse = np.sqrt(np.mean((np.array(all_labels) - np.array(all_predictions))**2))
-        
-        print(f"\nOverall Metrics:")
-        print(f"  Pearson correlation: {pearson_corr:.3f}")
-        print(f"  Spearman correlation: {spearman_corr:.3f}")
-        print(f"  RMSE: {rmse:.3f}")
-        
-        if run:
-            run.log({
-                "Overall pearson cor": pearson_corr,
-                "Overall spearman cor": spearman_corr,
-                "RMSE": rmse
-            })
     
     if run:
         run.finish()

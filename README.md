@@ -61,8 +61,8 @@ TxGemma is a specialized variant of the Gemma language model family, designed sp
 - ✅ **Experiment Tracking**: Integration with Weights & Biases (W&B)
 - ✅ **Cross-Validation Support**: Built-in k-fold cross-validation
 - ✅ **HPC Cluster Ready**: SLURM job submission scripts included
-- ✅ **Comprehensive Metrics**: Pearson/Spearman correlations, RMSE, per-drug analysis
-- ✅ **Visualization Tools**: Automated generation of performance plots
+- ✅ **Comprehensive Metrics**: Pearson/Spearman correlations, RMSE, per-drug analysis using [ai4clinic](https://github.com/KatynaSada/ai4clinic)
+- ✅ **Visualization Tools**: Automated generation of performance plots (density scatter, waterfall plots, best-to-worst drug rankings)
 
 ---
 
@@ -396,6 +396,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 - **Google DeepMind** - For developing and open-sourcing the TxGemma model
 - **Hugging Face** - For the transformers library and model hosting
 - **GDSC** - For providing the drug sensitivity dataset
+- **[ai4clinic](https://github.com/KatynaSada/ai4clinic)** - Our custom package for drug response metrics and visualization
 - **Original Tutorial** - Based on [Google Gemini Cookbook - TxGemma Fine-tuning](https://github.com/google-gemini/gemma-cookbook/blob/main/TxGemma/%5BTxGemma%5DFinetune_with_Hugging_Face.ipynb)
 
 ---

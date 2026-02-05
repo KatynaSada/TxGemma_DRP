@@ -26,14 +26,9 @@ from torch.utils.data import Dataset, DataLoader
 from scipy.stats import pearsonr, spearmanr
 from accelerate import Accelerator
 
-# Try to import custom modules if available
-try:
-    from ai4clinic.graphs import best2worst2
-    from ai4clinic.metrics import corr4drug
-except ImportError:
-    print("Warning: ai4clinic modules not found. Some visualization features may not work.")
-    best2worst2 = None
-    corr4drug = None
+# Import ai4clinic modules for metrics and visualization
+from ai4clinic.graphs import best2worst2
+from ai4clinic.metrics import corr4drug
 
 
 def get_compound_names(file_name):
@@ -411,8 +406,8 @@ def main(args):
             accelerator, model, tokenizer, data["test"], args
         )
         
-        # Generate visualization if ai4clinic is available
-        if best2worst2 is not None and predictions and actuals:
+        # Generate visualization
+        if predictions and actuals:
             try:
                 metrics, drug_correlations = best2worst2(
                     predictions=predictions,
