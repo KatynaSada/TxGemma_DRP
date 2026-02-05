@@ -14,8 +14,6 @@ CONDA_ENV_PATH="${HOME}/conda/envs/txgemma"
 source activate "${CONDA_ENV_PATH}"
 
 # Set API keys (export these as environment variables or use a secure method)
-# IMPORTANT: Never commit API keys to version control!
-# Instead, set them as environment variables before running this script:
 # export WANDB_API_KEY="your_key_here"
 # export HUGGINGFACE_TOKEN="your_token_here"
 
