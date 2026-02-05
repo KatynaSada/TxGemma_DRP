@@ -186,14 +186,12 @@ Organize your data in the following structure:
 
 ```
 data/
-└── GDSC1_drug-blind/
-    ├── gdsc1_celllines.txt       # Cell line descriptions
-    ├── compound_names.txt         # Drug SMILES and names
-    ├── fold1/
+└── GDSC1_cell-blind/
+    ├── samples1/
     │   ├── train.txt
     │   ├── validate.txt
     │   └── test.txt
-    ├── fold2/
+    ├── samples2/
     │   └── ...
     └── ...
 ```
@@ -238,16 +236,16 @@ chmod +x train_txgemma.sh
 
 ```bash
 python src/finetune_txgemma.py \
-    --input_folder ./data/GDSC1/ \
-    --output_folder ./results/GDSC1/ \
-    --fold fold1 \
+    --input_folder ./data/GDSC1_cell-blind/ \
+    --output_folder ./results/GDSC1_cell-blind/ \
+    --fold samples1 \
     --cell_description_file ./data/gdsc1_celllines.txt \
-    --train_file_path ./data/GDSC1/fold1/train.txt \
-    --train_jsonl_file_path ./data/GDSC1/fold1/train_prompts.jsonl \
-    --val_file_path ./data/GDSC1/fold1/validate.txt \
-    --val_jsonl_file_path ./data/GDSC1/fold1/validate_prompts.jsonl \
-    --test_file_path ./data/GDSC1/fold1/test.txt \
-    --test_jsonl_file_path ./data/GDSC1/fold1/test_prompts.jsonl \
+    --train_file_path ./data/GDSC1_cell-blind/samples1/train.txt \
+    --train_jsonl_file_path ./data/GDSC1_cell-blind/samples1/train_prompts.jsonl \
+    --val_file_path ./data/GDSC1_cell-blind/samples1/validate.txt \
+    --val_jsonl_file_path ./data/GDSC1_cell-blind/samples1/validate_prompts.jsonl \
+    --test_file_path ./data/GDSC1_cell-blind/samples1/test.txt \
+    --test_jsonl_file_path ./data/GDSC1_cell-blind/samples1/test_prompts.jsonl \
     --batch_size 10 \
     --num_train_epochs 40 \
     --learning_rate 5e-6 \
@@ -271,11 +269,11 @@ After training, compute final metrics across all folds:
 
 ```bash
 python src/compute_final_metrics.py \
-    --input_folder ./data/GDSC1/ \
-    --output_folder ./results/GDSC1/ \
-    --samples_folders "fold1,fold2,fold3,fold4,fold5" \
+    --input_folder ./data/GDSC1_cell-blind/ \
+    --output_folder ./results/GDSC1_cell-blind/ \
+    --samples_folders "samples1,samples2,samples3,samples4,samples5" \
     --input_type "mutations" \
-    --split_type "drug-blind" \
+    --split_type "cell-blind" \
     --wandb_project "TxGemma_DrugResponse"
 ```
 
@@ -299,27 +297,22 @@ sbatch submit_training.sbatch
 
 #### Cell Line Descriptions (`gdsc1_celllines.txt`)
 ```
-Cell_Line_ID,Description
-ACH-000001,NIHOVCAR3 is an ovarian carcinoma cell line
-ACH-000002,HL60 is an acute promyelocytic leukemia cell line
+MC-CAR, peripheral blood cell sourced from transformed
+ES5, cell sourced from cancer
+SK-ES-1, cell sourced from cancer
+COLO-829, skin cell sourced from cancer
 ...
 ```
+Format: `Cell_Line_Name, tissue and origin description`
 
 #### Training Data (`train.txt`, `validate.txt`, `test.txt`)
 ```
-Cell_Line_ID    SMILES    Sensitivity
-ACH-000001    CC1=CC=C(C=C1)C2=CC(=NN2C3=CC=C(C=C3)S(=O)(=O)N)C(F)(F)F    456.7
-ACH-000002    CC(C)CC1=CC=C(C=C1)C(C)C(=O)O    789.2
+Cell_Line_Name    SMILES    Sensitivity
+ES3	COC1=C(C=C(C=N1)C2=CC3=C(C=CN=C3C=C2)C4=CN=NC=C4)NS(=O)(=O)C5=C(C=C(C=C5)F)F	242
+KNS-42	C1=CC=C2C(=C1)C=CC3=C2C=CC(=C3)C4=CC(=NN4C5=CC=C(C=C5)NC(=O)CN)C(F)(F)F	558
 ...
 ```
-
-#### Compound Names (`compound_names.txt`)
-```
-Index    SMILES    Drug_Name
-1    CC1=CC=C(C=C1)...    Erlotinib
-2    CC(C)CC1=CC=C...    Ibuprofen
-...
-```
+Format: Tab-separated values with cell line name, drug SMILES, and sensitivity score
 
 ---
 
