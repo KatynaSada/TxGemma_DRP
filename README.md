@@ -46,6 +46,14 @@ This pipeline uses [**ai4clinic**](https://github.com/KatynaSada/ai4clinic), a s
 
 TxGemma is a specialized variant of the Gemma language model family, designed specifically for therapeutic and drug discovery applications. It can predict drug responses by understanding molecular structures (SMILES) and cellular contexts.
 
+### Dataset
+
+This pipeline is designed for the **GDSC1 (Genomics of Drug Sensitivity in Cancer 1)** dataset, which contains drug response measurements for cancer cell lines. The pipeline supports various cross-validation strategies including:
+- Drug-blind split (test on unseen drugs)
+- Cell-blind split (test on unseen cell lines)
+- Cancer-blind split (test on unseen cancer types)
+- Random split
+
 ### Key Applications
 
 - 🧬 **Precision Medicine**: Predict individual patient responses to cancer drugs
@@ -374,10 +382,11 @@ If you use this code in your research, please cite:
 Also cite the original TxGemma work:
 
 ```bibtex
-@article{bommasani2024gemma,
-  title={Gemma: Open Models Based on Gemini Research and Technology},
-  author={Gemma Team, Google},
-  year={2024}
+@article{wang2025txgemma,
+  title={TxGemma: Efficient and Agentic LLMs for Therapeutics},
+  author={Wang, Eric and Schmidgall, Samuel and Jaeger, Paul F. and Zhang, Fan and Pilgrim, Rory and Matias, Yossi and Barral, Joelle and Fleet, David and Azizi, Shekoofeh},
+  journal={arXiv preprint arXiv:2504.06196},
+  year={2025}
 }
 ```
 
@@ -403,9 +412,9 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## 🙏 Acknowledgments
 
-- **Google DeepMind** - For developing and open-sourcing the TxGemma model
+- **Google DeepMind** - For developing and open-sourcing the TxGemma model ([Wang et al., 2025](https://arxiv.org/abs/2504.06196))
 - **Hugging Face** - For the transformers library and model hosting
-- **GDSC** - For providing the drug sensitivity dataset
+- **GDSC** - For providing the Genomics of Drug Sensitivity in Cancer dataset
 - **[ai4clinic](https://github.com/KatynaSada/ai4clinic)** - Our custom package for drug response metrics and visualization
 - **Original Tutorial** - Based on [Google Gemini Cookbook - TxGemma Fine-tuning](https://github.com/google-gemini/gemma-cookbook/blob/main/TxGemma/%5BTxGemma%5DFinetune_with_Hugging_Face.ipynb)
 
