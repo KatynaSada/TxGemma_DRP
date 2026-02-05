@@ -2,23 +2,13 @@
 
 <div align="center">
 
-<p align="center">
-  <a href="https://ai.google.dev/gemma">
-    <img src="https://ai.google.dev/static/site-assets/images/docs/gemma-logo.svg" width="150" alt="Gemma Logo">
-  </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://huggingface.co/google/txgemma-2b-predict">
-    <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" width="150" alt="Hugging Face Logo">
-  </a>
-</p>
-
 ### Fine-tuning TxGemma for Cancer Drug Response Prediction
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
-Based on Google's [TxGemma Fine-tuning Cookbook](https://github.com/google-gemini/gemma-cookbook/blob/main/TxGemma/%5BTxGemma%5DFinetune_with_Hugging_Face.ipynb)
+**Based on Google's [TxGemma Fine-tuning Cookbook](https://github.com/google-gemini/gemma-cookbook/blob/main/TxGemma/%5BTxGemma%5DFinetune_with_Hugging_Face.ipynb)**
 
 </div>
 
